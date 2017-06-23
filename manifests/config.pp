@@ -149,9 +149,11 @@ class phpipam::config {
     user    => 'root',
   }
 
-  firewall { 'Open80':
+  firewall { '103 allow phpipam':
+    state  => ['NEW'],
+    dport  => '80',
     proto  => 'tcp',
-    port   => '80',
     action => 'accept',
   }
+
 }
