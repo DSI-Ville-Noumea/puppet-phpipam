@@ -65,9 +65,9 @@ class phpipam::config {
       }
 
       if $::phpipam::ssl_ca_certs {
-        
+
         validate_absolute_path($::phpipam::config::ssl_config['ssl_ca'])
-        
+
         file { $::phpipam::config::ssl_config['ssl_ca']:
           ensure  => file,
           owner   => 'root',
@@ -147,5 +147,11 @@ class phpipam::config {
     command => "${::phpipam::params::php_path} ${::phpipam::apache_docroot}/phpipam/functions/scripts/pingCheck.php",
     minute  => '*/15',
     user    => 'root',
+  }
+
+  firewall { 'Open 80':
+    proto  => 'tcp',
+    port   => '80',
+    action => 'accept',
   }
 }
